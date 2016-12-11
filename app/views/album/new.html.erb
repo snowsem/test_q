@@ -1,0 +1,56 @@
+<div class="row page-header">
+
+  <div class="pull-left">
+    <h2 class="header" style="margin: 0 0 0 13px; padding: 0px;">
+      <small>Новый альбом:</small>
+    </h2>
+  </div>
+
+  <div class="pull-right" style="padding-right: 12px;">
+    <a class="btn btn-danger" href="/album">Назад
+    </a>
+  </div>
+</div>
+<ol class="breadcrumb">
+  <li class="active">
+    <i class="fa fa-table"></i> <a href="/album">Альбомы</a>
+  </li>
+  <li class="active">
+    <i class="fa fa-recycle"></i> <a href="/album/new">Новый альбом</a>
+  </li>
+</ol>
+
+
+<div class="container-fluid">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6" style="padding-left: 0px">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-image fa-fw"></i> Новый альбом</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <%= form_for @a, :html => {:multipart => true}, :url => "/album" do |f| %>
+              <% if @a.errors.any? %>
+                  <div class="alert alert-warning">
+                    <% @a.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </div>
+              <% end %>
+
+              <p>
+                <%= f.label 'Название альбома' %>
+                <%= f.text_field :title, class: 'form-control'%>
+              </p>
+
+              <p><%= f.submit "Создать",  :class => "btn btn-primary" %></p>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

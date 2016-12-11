@@ -1,0 +1,45 @@
+<div class="row page-header">
+
+  <div class="pull-left">
+    <h2 class="header" style="margin: 0 0 0 13px; padding: 0px;">
+      <small>Список фото-альбомов:</small>
+    </h2>
+  </div>
+
+  <div class="pull-right" style="padding-right: 12px;">
+    <a class="btn btn-primary fa fa-plus-circle" href="/album/new">
+      Добавить
+    </a>
+
+  </div>
+</div>
+
+
+
+  <ol class="breadcrumb">
+    <li class="active">
+      <i class="fa fa-table"></i> <a href="/album">Альбомы</a>
+    </li>
+  </ol>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Название</th>
+    <th>Фотографий</th>
+    <th>Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <% @a.each do |p|%>
+
+      <tr>
+        <td><%= link_to(p.title, album_path(p.id)) %></td>
+        <td><%= p.photos_count %></td>
+        <td><%= link_to("Просмотр", album_path(p.id)) %> <%= link_to("Редактировать", edit_album_path(p.id)) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+

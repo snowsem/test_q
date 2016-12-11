@@ -1,0 +1,52 @@
+<div id="page-wrapper">
+
+  <div class="container-fluid"><!-- style="margin-top: 70px;"-->
+    <div class="row page-header">
+
+      <div class="pull-left">
+        <h2 class="header" style="margin: 0 0 0 13px; padding: 0px;">
+          <small><span class="translation_missing" title="translation missing: ru.album">Альбом </span><%= @album.title%></small>
+        </h2>
+      </div>
+
+      <div class="pull-right" style="padding-right: 12px;">
+        <a class="btn btn-danger" href="/album">Назад
+        </a>
+        <%= link_to("Редактировать",  edit_album_path(@album.id)) %>
+
+        <i class="fa fa-edit"></i>
+      </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <ol class="breadcrumb">
+          <li class="active">
+            <i class="fa fa-table"></i> <a href="/album">Альбомы</a>
+          </li>
+          <li class="active">
+            <i class="fa fa-recycle"></i> <a href="/album/<%= @album.id%>"><%= @album.title%></a>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+
+
+
+    <div>
+      <% @album.photos.each do |f|%>
+          <div class="col-lg-3 thumb" style="padding: 0 10px 0 0">
+           <%= image_tag  f.image_url(:thumb), :class=>"img-responsive", :style=>"height: 100px;" if f.image? %> </a>      </div>
+
+
+      <% end %>
+    </div>
+
+
+    <script>
+        $('un.nav li.active').removeClass('active');
+        $('li.albums').addClass('active');
+    </script>
+  </div>
+</div>

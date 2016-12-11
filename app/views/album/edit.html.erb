@@ -1,0 +1,87 @@
+<div class="row page-header">
+
+  <div class="pull-left">
+    <h2 class="header" style="margin: 0 0 0 13px; padding: 0px;">
+      <small>Редактирование альбома:</small>
+    </h2>
+  </div>
+  <div class="pull-right" style="padding-right: 12px;">
+    <%= form_for @photo, :html => {:multipart => true}, :method => :POST, :url => "/album/#{@album.id}/add" do |f| %>
+        <p>
+          <%= f.file_field :image %>
+          <%= f.hidden_field(:image_cache) %>
+        </p>
+        <p><%= f.submit "Загрузить" %></p>
+    <% end %>
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-image fa-fw"></i> Редактирование альбома</h3>
+      </div>
+      <div class="panel-body">
+        <div class="wice-grid-container table-responsive" data-grid-name="grid" id="grid">
+          <div id="grid_title"></div>
+          <table class="table-striped table-bordered table wice-grid">
+            <thead>
+            <tr class="wice-grid-title-row">
+              <th class="">Фото</th>
+              <th class=""></th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+              <td colspan="2">
+                <div class="pagination_status">count</div>
+              </td>
+            </tr>
+            </tfoot>
+            <tbody>
+            <% @album.photos.each do |p| %>
+                <%= p.image %>
+                <tr class="odd">
+                  <td>
+                    <%= image_tag p.image_url(:thumb), :class => "img-responsive", :style => "height: 100px;" if p.image? %>
+                  </td>
+                  <td>
+                    <a data-confirm="Вы уверены?" rel="nofollow" data-method="delete" href="<%= "/album/#{@album.id}/photo/#{p.id}" %>">Удалить</a>
+                  </td>
+                </tr>
+
+
+            <% end %>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4" style="padding-left: 0px">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-image fa-fw"></i> Редактирование альбома</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+
+          <%= form_for @album, :html => {:multipart => true}, :method => :PUT, :url => album_path do |f| %>
+
+              <p>
+                <%= f.label 'Название альбома' %>
+                <%= f.text_field :title, class: 'form-control' %>
+              </p>
+
+              <p><%= f.submit "Сохранить", :class => "btn btn-primary" %></p>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
